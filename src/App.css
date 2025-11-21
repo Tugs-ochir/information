@@ -1,0 +1,72 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #05021b;
+  color: #ffffff;
+}
+
+.hero-space {
+  position: relative;
+  background: radial-gradient(circle at top, rgba(138, 92, 246, 0.3), transparent 55%),
+    radial-gradient(circle at 20% 20%, rgba(7, 199, 255, 0.25), transparent 40%),
+    #05021b;
+  overflow: hidden;
+}
+
+.hero-space::before,
+.hero-space::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.25;
+  animation: drift 60s linear infinite;
+}
+
+.hero-space::after {
+  background-size: 120px 120px;
+  opacity: 0.15;
+  animation-duration: 80s;
+}
+
+.space-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(13, 12, 36, 0) 40%, rgba(8, 7, 20, 0.8));
+  pointer-events: none;
+}
+
+.floating-shape {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 32px;
+  filter: drop-shadow(0 10px 40px rgba(98, 0, 234, 0.2));
+}
+
+.floating-shape--one {
+  bottom: 8%;
+  right: 8%;
+}
+
+.floating-shape--two {
+  top: 12%;
+  left: 5%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border-color: rgba(16, 236, 255, 0.35);
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(60px, 60px, 0);
+  }
+}
