@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.jsx",
-    "start": "vite preview --port $PORT"
+    "start": "vite preview --port $PORT --host"
   },
   "dependencies": {
     "framer-motion": "^10.16.4",
