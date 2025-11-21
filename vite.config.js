@@ -4,6 +4,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   base: '/',
+  preview: {
+    allowedHosts: ['tugs-ochir.onrender.com', 'tugs-ochir.info']
+  },
   server: {
     port: 3000,
     open: true
