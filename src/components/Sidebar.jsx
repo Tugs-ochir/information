@@ -15,6 +15,7 @@ import { motion } from 'framer-motion'
 
 const Sidebar = ({ mobileOpen, setMobileOpen }) => {
   const location = useLocation()
+  const [desktopOpen, setDesktopOpen] = React.useState(true)
 
   const navLinks = [
     { name: 'Home', path: '/', icon: FaHome },
@@ -29,22 +30,31 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
     visible: { x: 0 },
   }
 
+  const handleToggleButton = () => {
+    // Desktop: close sidebar on hover/click
+    if (window.innerWidth >= 1024) {
+      setDesktopOpen(!desktopOpen)
+    } else {
+      // Mobile: toggle sidebar open/close
+      setMobileOpen(!mobileOpen)
+    }
+  }
+
   return (
     <>
       <button
-        onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-blue-600 text-white rounded-lg"
+        onClick={handleToggleButton}
+        className="lg:fixed lg:top-4 lg:left-4 lg:z-50 fixed top-4 left-4 z-50 p-2 bg-blue-600 text-white rounded-lg"
       >
-        {mobileOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        {mobileOpen || !desktopOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </button>
 
       <motion.aside
-        initial="hidden"
-        animate="visible"
-        variants={sidebarVariants}
-        className={`fixed left-0 top-0 h-screen w-80 bg-gradient-to-b from-[#060b25] via-[#090d2f] to-[#120729] text-white p-8 shadow-2xl z-40 transform transition-transform duration-300 ${
-          !mobileOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'
-        }`}
+        animate={{
+          x: window.innerWidth < 1024 ? (!mobileOpen ? -320 : 0) : (!desktopOpen ? -320 : 0)
+        }}
+        transition={{ duration: 0.3 }}
+        className="fixed left-0 top-0 h-screen w-80 bg-gradient-to-b from-[#060b25] via-[#090d2f] to-[#120729] text-white p-8 shadow-2xl z-40"
       >
         <div className="flex flex-col h-full">
           <motion.div

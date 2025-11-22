@@ -9,7 +9,7 @@ import Blog from './pages/Blog'
 import './App.css'
 
 function App() {
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   return (
     <Router>
