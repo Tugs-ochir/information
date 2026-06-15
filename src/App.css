@@ -4,53 +4,65 @@
 
 body {
   background-color: #05021b;
-  color: #ffffff;
+  color: #e6e9ff;
 }
 
+/* Ambient deep-space backdrop with layered aurora glows */
 .hero-space {
   position: relative;
-  background: radial-gradient(circle at top, rgba(138, 92, 246, 0.3), transparent 55%),
-    radial-gradient(circle at 20% 20%, rgba(7, 199, 255, 0.25), transparent 40%),
+  background:
+    radial-gradient(circle at 80% -10%, rgba(168, 85, 247, 0.28), transparent 45%),
+    radial-gradient(circle at 15% 15%, rgba(34, 211, 238, 0.22), transparent 40%),
+    radial-gradient(circle at 50% 120%, rgba(59, 130, 246, 0.2), transparent 55%),
     #05021b;
   overflow: hidden;
+  isolation: isolate;
 }
 
+/* Two layers of drifting stars */
 .hero-space::before,
 .hero-space::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.25;
-  animation: drift 60s linear infinite;
-}
-
-.hero-space::after {
-  background-size: 120px 120px;
-  opacity: 0.15;
-  animation-duration: 80s;
-}
-
-.space-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(13, 12, 36, 0) 40%, rgba(8, 7, 20, 0.8));
+  inset: -50%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.85) 1px, transparent 1px);
+  background-size: 70px 70px;
+  opacity: 0.18;
+  animation: drift 90s linear infinite;
   pointer-events: none;
 }
 
+.hero-space::after {
+  background-size: 130px 130px;
+  opacity: 0.1;
+  animation-duration: 130s;
+  animation-direction: reverse;
+}
+
+/* Soft vignette to focus content */
+.space-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(13, 12, 36, 0) 35%, rgba(5, 2, 27, 0.85));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating decorative orbs / frames on the hero */
 .floating-shape {
   position: absolute;
   width: 240px;
   height: 240px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 32px;
-  filter: drop-shadow(0 10px 40px rgba(98, 0, 234, 0.2));
+  filter: drop-shadow(0 10px 40px rgba(98, 0, 234, 0.25));
+  backdrop-filter: blur(2px);
 }
 
 .floating-shape--one {
   bottom: 8%;
   right: 8%;
+  background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.12), transparent 70%);
 }
 
 .floating-shape--two {
@@ -59,7 +71,8 @@ body {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  border-color: rgba(16, 236, 255, 0.35);
+  border-color: rgba(34, 211, 238, 0.35);
+  background: radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.14), transparent 70%);
 }
 
 @keyframes drift {
@@ -67,6 +80,14 @@ body {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(60px, 60px, 0);
+    transform: translate3d(70px, 70px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-space::before,
+  .hero-space::after,
+  .floating-shape {
+    animation: none !important;
   }
 }

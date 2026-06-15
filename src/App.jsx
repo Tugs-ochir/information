@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import Resume from './pages/Resume'
@@ -8,18 +8,27 @@ import Contact from './pages/Contact'
 import Blog from './pages/Blog'
 import './App.css'
 
+// Scroll the main content back to the top whenever the route changes.
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-[#05021b] text-white">
-        {/* Sidebar */}
+      <ScrollToTop />
+      <div className="flex min-h-screen bg-[#05021b] text-ink">
         <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 min-h-screen overflow-y-auto lg:ml-80 hero-space relative">
-          <div className="relative z-10 p-4 sm:p-8 lg:p-16">
+        <main className="hero-space relative min-h-screen flex-1 lg:ml-80">
+          <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-16 sm:px-8 lg:px-16">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resume" element={<Resume />} />

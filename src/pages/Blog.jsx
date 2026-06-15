@@ -1,43 +1,44 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-
-const articles = [
-
-]
+import { FaPenNib, FaArrowLeft } from 'react-icons/fa'
 
 const Blog = () => {
   return (
-    <section className="max-w-5xl mx-auto text-white">
+    <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center text-white">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="mb-12"
+        className="mx-auto max-w-xl text-center"
       >
-        <h1 className="text-4xl sm:text-5xl font-semibold">Very soon </h1>
-        <p className="text-lg text-slate-300 mt-4 max-w-2xl">
+        <div className="relative mx-auto mb-8 flex h-24 w-24 items-center justify-center">
+          <div className="absolute inset-0 animate-pulse-slow rounded-full bg-cyan-500/30 blur-2xl" />
+          <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-brand-gradient shadow-glow">
+            <FaPenNib className="text-3xl text-white" />
+          </div>
+        </div>
 
+        <p className="eyebrow">Blog</p>
+        <h1 className="mt-4 font-display text-4xl font-bold sm:text-5xl">
+          Coming <span className="text-gradient">very soon</span>
+        </h1>
+        <p className="mx-auto mt-5 max-w-md text-lg text-slate-300">
+          I'm putting together articles about web development, the projects I build,
+          and the lessons I pick up along the way. Stay tuned!
         </p>
-      </motion.div>
 
-      <div className="grid gap-6">
-        {articles.map((article, index) => (
-          <motion.article
-            key={article.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 + 0.2 }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md hover:border-cyan-400/50 transition-all duration-300"
-          >
-            <p className="text-sm text-cyan-200 mb-2">{article.date}</p>
-            <h2 className="text-2xl font-semibold mb-3">{article.title}</h2>
-            <p className="text-slate-200 leading-relaxed">{article.summary}</p>
-          </motion.article>
-        ))}
-      </div>
+        <motion.a
+          href="/"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="btn-ghost mt-10 px-8 py-3.5"
+        >
+          <FaArrowLeft />
+          Back to Home
+        </motion.a>
+      </motion.div>
     </section>
   )
 }
 
 export default Blog
-
